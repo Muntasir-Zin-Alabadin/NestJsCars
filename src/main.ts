@@ -9,11 +9,8 @@ async function bootstrap() {
     keys: ['abcde'],
     }),
   );
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true
-    })
-  );
-  await app.listen(process.env.PORT ?? 3000);
+
+  //await app.listen(process.env.PORT ?? 3000); //local
+  await app.listen(process.env.PORT || 3000); //Heroku
 }
 bootstrap();

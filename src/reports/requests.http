@@ -1,0 +1,25 @@
+### Sign in first
+POST http://localhost:3000/reports
+content-type: application/json
+
+{
+    "make": "ford",
+    "model": "mustang",
+    "year": 1979,
+    "mileage": 50000,
+    "lng": 45,
+    "lat": 45,
+    "price": 11000
+}
+
+### Approve an existing report
+PATCH http://localhost:3000/reports/9
+content-type: application/json
+
+{
+    "approved": true
+}
+
+### Get an estimate for an existing vehicle
+GET http://localhost:3000/reports?make=ford&model=mustang&lng=45&lat=45&mileage=20000&year=1980 
+//this will return an error because numbers aren't parsed and are still strings, this does't apply to lng and lat because in the get-estimate.dto.ts we used @IsLongtitude and @IsLatitude, but we stil need to parse them as well

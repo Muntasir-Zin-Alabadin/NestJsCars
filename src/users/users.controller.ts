@@ -2,13 +2,13 @@ import { Body, Controller, Post, Get, Patch, Param, Query, Delete, NotFoundExcep
 import { CreateUserDto } from './dtos/create-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
 import { UsersService } from './users.service';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dtos/user.dto';
 import { AuthService } from './auth.service';
 import { Auth } from 'typeorm';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { User } from './user.entity';
-import { AuthGuard } from 'src/guards/auth.guards';
+import { AuthGuard } from '../guards/auth.guards';
 
 @Controller('auth') //auth or whatever you want to be before this section i.e. auth/...
 @Serialize(UserDto) //To have no password shown in any respense
@@ -60,7 +60,7 @@ export class UsersController {
     //@UseInterceptors(new SerializeInterceptor(UserDto)) (deleted because we used a function instead (Serialize))
     @Get('/:id')
     async findUser(@Param('id') id: string) {
-        console.log('handler is running');
+        // console.log('handler is running');
         const user = await this.usersService.findOne(parseInt(id));
         if (!user) {
             throw new NotFoundException('user not found')
